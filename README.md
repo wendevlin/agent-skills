@@ -6,6 +6,10 @@ a skill needs them.
 
 ## Skills
 
+- [`fdm-parametric-design`](skills/fdm-parametric-design/SKILL.md): Design
+  functional 3D-printable parts as parametric OpenSCAD models and deliver
+  print-ready 3MF/STL files with slicer settings, previews and a publishing
+  package. Needs `openscad` and `xvfb` (see `scripts/setup.sh` in the skill).
 - [`ha-frontend-pr-text`](skills/ha-frontend-pr-text/SKILL.md): Draft a Home
   Assistant frontend pull request title, body, and screenshot hint.
 - [`work-on-task`](skills/work-on-task/SKILL.md): Carry out a coding task on
