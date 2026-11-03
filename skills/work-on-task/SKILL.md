@@ -53,10 +53,16 @@ Fix what you find in new commits, then review the fixes the same way. Only stop 
 
 ## 5. Report back
 
-Keep the report short:
+Keep the report short, in this order:
 
-- The branch name, and that no PR was opened.
 - What changed and why, in a few bullets.
 - Which checks you ran and their results. Say plainly if something failed or was skipped.
 - What the review round found and how you fixed it.
 - Open questions and out-of-scope issues you noticed.
+- That no PR was opened.
+
+End the report with the branch name alone in a `text` code block, so it is the last thing in the reply and can be copied with one click:
+
+```text
+claude/fix-login-redirect-4821
+```
