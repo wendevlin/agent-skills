@@ -1,0 +1,6 @@
+{
+  "config": {
+    // SKILL.md files keep one paragraph per line; README wraps at 80. Both are fine.
+    "MD013": false
+  }
+}

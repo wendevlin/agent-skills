@@ -120,7 +120,7 @@ Keep it to a few bullets and be concrete about what to show:
 
 ## Output format
 
-````
+````markdown
 **Title**
 
 ```text

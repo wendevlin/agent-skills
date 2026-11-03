@@ -2,6 +2,7 @@ name: Validate skills
 
 on:
   push:
+    branches: [main]
   pull_request:
 
 permissions:
@@ -9,31 +10,18 @@ permissions:
 
 jobs:
   validate:
+    name: Validate skill metadata
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Validate skill structure and metadata
-        run: |
-          ruby <<'RUBY'
-          require "yaml"
+        run: ruby scripts/validate-skills.rb
 
-          skill_dirs = Dir.glob("skills/*").select { |path| File.directory?(path) }
-          abort "No skill folders found under skills/" if skill_dirs.empty?
-
-          skill_dirs.each do |directory|
-            path = File.join(directory, "SKILL.md")
-            abort "#{directory} is missing SKILL.md" unless File.file?(path)
-
-            content = File.read(path)
-            match = content.match(/\A---\s*\n(.*?)\n---\s*(?:\n|\z)/m)
-            abort "#{path} must start with YAML front matter" unless match
-
-            metadata = YAML.safe_load(match[1])
-            unless metadata.is_a?(Hash) &&
-                   metadata["name"] == File.basename(directory) &&
-                   metadata["description"].is_a?(String) &&
-                   !metadata["description"].strip.empty?
-              abort "#{path} must have a matching name and non-empty description"
-            end
-          end
-          RUBY
+  markdownlint:
+    name: Lint markdown
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: DavidAnson/markdownlint-cli2-action@v25
+        with:
+          globs: "**/*.md"
