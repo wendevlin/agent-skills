@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Installiert, was der Skill braucht (Cloud-Container: Debian/Ubuntu, root).
+# Installs what the skill needs (cloud container: Debian/Ubuntu, root).
 set -e
 if ! command -v openscad >/dev/null; then
   (apt-get update -qq && apt-get install -y -qq openscad xvfb) >/dev/null

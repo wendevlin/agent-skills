@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Interaktive 3D-Ansicht (three.js, eine HTML-Datei) aus STL-Teilen bauen – zum Veröffentlichen als Artifact.
+"""Build an interactive 3D viewer (three.js, single HTML file) from STL parts - to publish as an Artifact.
 
-python3 build_viewer.py out.html "Titel" "Untertitel" teil.stl:#3b82c4[:dx,dy,dz] ...
-  Farbe pro Teil, optional Explosions-Richtung (mm bei 100 %).
-  Koordinaten wie im Modell: Y nach oben (OpenSCAD-Teile ggf. vorher mit rotate([90,0,0]) exportieren
-  oder Z-oben-Modelle mit --zup drehen lassen).
+python3 build_viewer.py out.html "Title" "Subtitle" part.stl:#3b82c4[:dx,dy,dz] ...
+  Colour per part, optional explode vector (mm at 100 %).
+  The viewer uses Y up: pass --zup for Z-up models (OpenSCAD default).
 """
 import sys, os, json, base64, struct, argparse
 sys.path.insert(0, os.path.dirname(__file__))

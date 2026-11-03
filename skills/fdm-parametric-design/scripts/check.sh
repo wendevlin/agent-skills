@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# Kollisions-/Spieltest: rendert einen OpenSCAD-Ausdruck mit CGAL und sagt, ob er leer ist.
-# check.sh <file.scad> '<openscad code>'      (die Datei wird per include geladen, part="none")
-# Beispiel: check.sh model.scad 'intersection(){ a(); translate([0,-10,0]) b(); }'
-# Ausgabe: EMPTY (keine Überschneidung) oder SOLID (Überschneidung). Nullvolumen-Berührung zählt als EMPTY.
+# Clash/clearance test: renders an OpenSCAD expression with CGAL and reports whether it is empty.
+# check.sh <file.scad> '<openscad code>'   (the file is included with part="none";
+#   its dispatch must draw nothing for unknown part values)
+# Example: check.sh model.scad 'intersection(){ a(); translate([0,-10,0]) b(); }'
+# Output: EMPTY (no overlap) or SOLID (overlap). Touching faces (zero volume) count as EMPTY.
 set -e
 scad=$(readlink -f "$1"); expr=$2
 tmp=$(mktemp -d); trap 'rm -rf $tmp' EXIT

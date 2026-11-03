@@ -16,11 +16,11 @@ ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px
 @media (max-width:720px){.wrap{grid-template-columns:minmax(0,1fr)} .stage{min-height:60vh}}
 </style>
 <div class="wrap">
-  <div class="stage"><canvas id="view"></canvas><div class="hint">Ziehen: drehen · Scrollen: zoomen · Rechtsklick: verschieben</div><div class="err" id="err" hidden>WebGL nicht verfügbar.</div></div>
+  <div class="stage"><canvas id="view"></canvas><div class="hint">Drag: rotate · Scroll: zoom · Right-drag: pan</div><div class="err" id="err" hidden>WebGL is not available.</div></div>
   <aside>
     <div><h1>__TITLE__</h1><p class="sub">__SUBTITLE__</p></div>
-    <div><label for="ex">Auseinanderziehen <span id="exv">0 %</span></label><input type="range" id="ex" min="0" max="100" value="0"></div>
-    <label for="cut">Schnitt durch die Mitte <input type="checkbox" id="cut"></label>
+    <div><label for="ex">Explode <span id="exv">0 %</span></label><input type="range" id="ex" min="0" max="100" value="0"></div>
+    <label for="cut">Section through the middle <input type="checkbox" id="cut"></label>
     <ul id="legend"></ul>
   </aside>
 </div>

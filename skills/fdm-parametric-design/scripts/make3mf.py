@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""Teile in Druckausrichtung drehen und als 3MF (eine Druckplatte, getrennte Objekte) + einzelne STLs speichern.
+"""Rotate parts into print orientation and save them as one 3MF plate (separate objects) plus STLs.
 
 python3 make3mf.py out.3mf teil.stl[:nx,ny,nz] ...  [--stl-dir DIR] [--bed 240]
-  nx,ny,nz = AUSSEN-Normale der Fläche (im Modell-Koordinatensystem), die aufs Bett soll.
-             Weglassen = so lassen wie es ist (nur auf z=0 setzen).
-  Beispiele:  slot.stl:0,-1,0.268   (geschrägte Unterseite unten)
-              plate.stl              (liegt schon richtig)
-              lid.stl:0,1,-0.268     (Oberseite unten)
-Plain-3MF: Bambu Studio / PrusaSlicer / Orca öffnen es direkt, jedes Teil bleibt ein eigenes Objekt.
+  nx,ny,nz = OUTWARD normal (model coordinates) of the face that goes on the bed.
+             Omit it to keep the orientation (only moved to z=0).
+  Examples:   slot.stl:0,-1,0.268   (sheared bottom face down)
+              plate.stl              (already oriented)
+              lid.stl:0,1,-0.268     (top face down)
+Plain 3MF: Bambu Studio / PrusaSlicer / Orca open it directly, each part stays a separate object.
+Slicer settings (supports etc.) cannot be stored in it - write them out for the user.
 """
 import sys, os, zipfile, argparse, numpy as np
 
@@ -51,7 +52,7 @@ def main():
         if a.stl_dir: os.makedirs(a.stl_dir,exist_ok=True); write_stl(t,os.path.join(a.stl_dir,name+'.stl'),name)
         if x+sz[0]>a.bed: x=0; y+=rowh+a.gap; rowh=0
         objs.append((name,t+[x+8,y+8,0])); x+=sz[0]+a.gap; rowh=max(rowh,sz[1])
-        print(f'  {name:20s} {sz[0]:6.1f} x {sz[1]:6.1f} x {sz[2]:6.1f} mm  Auflage {contact(t):6.0f} mm²')
+        print(f'  {name:20s} {sz[0]:6.1f} x {sz[1]:6.1f} x {sz[2]:6.1f} mm  bed contact {contact(t):6.0f} mm²')
     xml=['<?xml version="1.0" encoding="UTF-8"?>','<model unit="millimeter" xml:lang="en-US" xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02">','<resources>']
     for i,(name,t) in enumerate(objs,1):
         v=t.reshape(-1,3).round(4); uv,inv=np.unique(v,axis=0,return_inverse=True); f=inv.reshape(-1,3)
