@@ -10,7 +10,9 @@ Carry the task from a clean start to a reviewed, committed result on its own bra
 ## 1. Start on a new branch
 
 - Check `git status` first. If there are uncommitted changes that are not yours, stop and ask what to do with them; never stash, reset or discard them on your own.
-- Branch from the up-to-date default branch, not from whatever happens to be checked out: `git fetch origin`, then `git switch -c <branch> origin/<default>`. Find the default with `git symbolic-ref refs/remotes/origin/HEAD` if unsure. If the task builds on another unmerged branch, branch from that one instead and say so.
+- If you are continuing a task that already has its own branch, stay on that branch instead of creating a new one.
+- Otherwise branch from the up-to-date default branch, not from whatever happens to be checked out: `git fetch origin`, then `git switch -c <branch> origin/<default>`. Find the default with `git symbolic-ref refs/remotes/origin/HEAD` if unsure; without a remote, branch from the local default branch. If the task builds on another unmerged branch, branch from that one instead and say so.
+- Remember the branch you started from: it is the `<base>` for the review in section 4.
 - Name the branch `<agent-name>/<meaningful-name>`:
   - `<agent-name>` is your own name in lowercase, for example `claude`, `copilot` or `codex`.
   - `<meaningful-name>` is a short kebab-case summary of the change, starting with a verb where it reads naturally: `claude/add-csv-export`, `copilot/fix-login-redirect`, `codex/remove-legacy-config`.
@@ -34,8 +36,8 @@ Carry the task from a clean start to a reviewed, committed result on its own bra
 When the task feels done, do one more full review round before reporting. Review the complete change as a reviewer seeing it for the first time, not from memory:
 
 ```sh
-git diff origin/<default>...HEAD
-git log --oneline origin/<default>..HEAD
+git diff <base>...HEAD
+git log --oneline <base>..HEAD
 ```
 
 Check for:
