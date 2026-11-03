@@ -8,6 +8,9 @@ a skill needs them.
 
 - [`ha-frontend-pr-text`](skills/ha-frontend-pr-text/SKILL.md): Draft a Home
   Assistant frontend pull request title, body, and screenshot hint.
+- [`work-on-task`](skills/work-on-task/SKILL.md): Carry out a coding task on
+  an `<agent-name>/<meaningful-name>` branch, without opening a pull request,
+  and finish with a self-review round.
 
 ## Contributing
 
